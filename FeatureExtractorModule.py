@@ -8,6 +8,12 @@ def customTokenizer(text):
 word_vec = CountVectorizer(tokenizer=customTokenizer)
 pos_vec = CountVectorizer(tokenizer=customTokenizer)
 
+def setFeatureExtractors(featureExtractorMap):
+    global word_vec
+    global pos_vec
+    word_vec = featureExtractorMap["word_vec"]
+    pos_vec = featureExtractorMap["pos_vec"]
+
 def extractFeatures(examples,isTraining):
     corpus = []
     posCorpus = []
@@ -42,3 +48,6 @@ def extractPos(text):
     for pos in pos_seq:
         pos_seq_str=pos_seq_str+" "+pos[1]
     return pos_seq_str.strip()
+
+def getVectorizers():
+    return word_vec,pos_vec

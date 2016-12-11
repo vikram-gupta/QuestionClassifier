@@ -24,25 +24,37 @@ def readData(fileName):
 
 print "Reading training examples..."
 trainingExamples = readData(trainingDataFileName)
-print "Reading testing examples..."
-testingExamples = readData(testingDataFileName)
+print "Reading development examples..."
+developmentExamples = readData(developmentDataFileName)
 
 featuresDict = {}
+featuresExtractorDict = {}
 
 print "Extracting training features..."
 trainingClasses,trainingFeatures = extractFeatures(trainingExamples,True)
 
-print "Extracting testing features..."
-testingClasses,testingFeatures = extractFeatures(testingExamples,False)
+print "Extracting development features..."
+developmentClasses, developmentFeatures = extractFeatures(developmentExamples, False)
+
+print "Saving vectorizers..."
+word_vec,pos_vec = getVectorizers()
 
 featuresDict["trainingClasses"] = trainingClasses
 featuresDict["trainingFeatures"] = trainingFeatures
-featuresDict["testingClasses"] = testingClasses
-featuresDict["testingFeatures"] = testingFeatures
+featuresDict["developmentClasses"] = developmentClasses
+featuresDict["developmentFeatures"] = developmentFeatures
+
+featuresExtractorDict["word_vec"] = word_vec
+featuresExtractorDict["pos_vec"] = pos_vec
 
 print "Pickling the features..."
 pickledFeaturesFileHandle = open(pickledFeaturesFileName,'wb')
 pickle.dump(featuresDict, pickledFeaturesFileHandle)
 pickledFeaturesFileHandle.close()
+
+print "Pickling the feature extractors..."
+pickledFeatureExtractorsFileHandle = open(pickledFeatureExtractorsFileName,'wb')
+pickle.dump(featuresExtractorDict, pickledFeatureExtractorsFileHandle)
+pickledFeatureExtractorsFileHandle.close()
 
 print "Done"

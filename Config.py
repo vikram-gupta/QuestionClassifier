@@ -1,4 +1,6 @@
 trainingDataFileName = "small_training.txt"
+developmentDataFileName = "small_development.txt"
 testingDataFileName = "small_testing.txt"
 pickledModelFileName = "model.pickle"
 pickledFeaturesFileName = "features.pickle"
+pickledFeatureExtractorsFileName = "featureExtractors.pickle"
